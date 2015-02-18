@@ -31,7 +31,7 @@ echo "# Install MMS" ;\
 echo "# Generate start script" ;\
   echo '#!/bin/bash' > mms-agent ;\
   echo 'sed -i "s/mmsApiKey=/mmsApiKey=$MMS_API_KEY/g" /opt/mms/monitoring-agent.config' >> mms-agent ;\
-  echo "/opt/mms/mongodb-mms-monitoring-agent" >> mms-agent ;\
+  echo "/opt/mms/mongodb-mms-monitoring-agent -conf /opt/mms/monitoring-agent.config" >> mms-agent ;\
   chmod +x mms-agent ;\
   \
 true
