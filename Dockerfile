@@ -18,7 +18,7 @@ ENV HOME /root
 RUN \
   cd /root ; \
   apt-get update -qq ; \
-  apt-get install -q -y wget ; \
+  apt-get install -q -y --force-yes wget ; \
   apt-get clean ; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ; \
   \
 echo "# Install MMS" ;\
