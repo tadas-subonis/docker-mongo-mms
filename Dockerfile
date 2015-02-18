@@ -9,7 +9,7 @@
 #
 # VERSION               1.0
 
-FROM ubuntu:wheezy
+FROM debian:wheezy
 MAINTAINER Tadas Subonis
 
 ENV HOME /root
