@@ -16,9 +16,9 @@ ENV HOME /root
 
 # Install using one RUN line to get around 42 AUFS layers limit.
 RUN \
-  cd /root ;
-  apt-get update -qq ;\
-  apt-get install -q -y wget ;\
+  cd /root ; \
+  apt-get update -qq ; \
+  apt-get install -q -y wget ; \
   apt-get clean ; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ; \
   \
 echo "# Install MMS" ;\
