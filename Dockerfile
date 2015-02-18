@@ -9,22 +9,22 @@
 #
 # VERSION               1.0
 
-FROM ubuntu:12.10
+FROM ubuntu:wheezy
 MAINTAINER Tadas Subonis
 
 ENV HOME /root
+ENV MMS_VERSION 3.0.0.167-1
 
 # Install using one RUN line to get around 42 AUFS layers limit.
 RUN \
-  cd /root ; \
-  apt-get update -qq ; \
-  apt-get install -q -y --force-yes wget ; \
+  apt-get update ; \
+  apt-get install -q -y --force-yes curl ; \
   apt-get clean ; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ; \
   \
 echo "# Install MMS" ;\
-  wget https://mms.mongodb.com/download/agent/monitoring/mongodb-mms-monitoring-agent-3.0.0.167-1.linux_x86_64.tar.gz ;\
-  tar zxf mongodb-mms-monitoring-agent-3.0.0.167-1.linux_x86_64.tar.gz ;\
-  rm mongodb-mms-monitoring-agent-3.0.0.167-1.linux_x86_64.tar.gz ;\
+  curl -sSL https://mms.mongodb.com/download/agent/monitoring/mongodb-mms-monitoring-agent-${MMS_VERSION}.linux_x86_64.tar.gz -o mms.tar.gz ;\
+  tar zxf mms.tar.gz ;\
+  rm mms.tar.gz ;\
   \
 echo "# Generate start script" ;\
   echo '#!/bin/bash' > mms-agent ;\
