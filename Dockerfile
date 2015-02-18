@@ -17,7 +17,7 @@ ENV HOME /root
 # Install using one RUN line to get around 42 AUFS layers limit.
 RUN \
 echo "# Install MMS" ;\
-  curl -OL https://mms.mongodb.com/download/agent/monitoring/mongodb-mms-monitoring-agent-3.0.0.167-1.linux_x86_64.tar.gz
+  wget https://mms.mongodb.com/download/agent/monitoring/mongodb-mms-monitoring-agent-3.0.0.167-1.linux_x86_64.tar.gz
   tar zxf mongodb-mms-monitoring-agent-3.0.0.167-1.linux_x86_64.tar.gz ;\
   rm mongodb-mms-monitoring-agent-3.0.0.167-1.linux_x86_64.tar.gz ;\
   \
