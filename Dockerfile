@@ -3,40 +3,28 @@
 # Includes:
 #   - MMS agent (from 10gen)
 #
-# Build with:
-#
-#     docker build -t walm/mongo-mms .
-#
 # Run using
 #
-#     docker run -d -e "MMS_API_KEY=<key>" -e "MMS_SECRET_KEY=<key>" walm/mongo-mms
+#     docker run -d -e MMS_API_KEY=<key> tasubo/docker-mongo-mms
 #
 # VERSION               1.0
 
 FROM ubuntu:12.10
-MAINTAINER Andreas Wålm "andreas@walm.net"
+MAINTAINER Tadas Subonis
+
+ENV HOME /root
 
 # Install using one RUN line to get around 42 AUFS layers limit.
 RUN \
-  echo "# Base" ;\
-  apt-get update -qq ;\
-  apt-get install -q -y build-essential python-dev python-setuptools wget ;\
-  \
-echo "# Install pymongo" ;\
-  easy_install pymongo ;\
-  \
 echo "# Install MMS" ;\
-  cd /opt ;\
-  wget https://mms.mongodb.com/settings/mms-monitoring-agent.tar.gz --no-check-certificate ;\
-  tar zxf mms-monitoring-agent.tar.gz ;\
-  rm mms-monitoring-agent.tar.gz ;\
+  curl -OL https://mms.mongodb.com/download/agent/monitoring/mongodb-mms-monitoring-agent-3.0.0.167-1.linux_x86_64.tar.gz
+  tar zxf mongodb-mms-monitoring-agent-3.0.0.167-1.linux_x86_64.tar.gz ;\
+  rm mongodb-mms-monitoring-agent-3.0.0.167-1.linux_x86_64.tar.gz ;\
   \
 echo "# Generate start script" ;\
-  cd /usr/bin ;\
   echo '#!/bin/bash' > mms-agent ;\
-  echo 'sed -i "s/@API_KEY@/$MMS_API_KEY/g" /opt/mms-agent/settings.py' >> mms-agent ;\
-  echo 'sed -i "s/@SECRET_KEY@/$MMS_SECRET_KEY/g" /opt/mms-agent/settings.py' >> mms-agent ;\
-  echo "python /opt/mms-agent/agent.py" >> mms-agent ;\
+  echo 'sed -i "s/mmsApiKey=/mmsApiKey=$MMS_API_KEY/g" monitoring-agent.config' >> mms-agent ;\
+  echo "./mongodb-mms-monitoring-agent" >> mms-agent ;\
   chmod +x mms-agent ;\
   \
 true
