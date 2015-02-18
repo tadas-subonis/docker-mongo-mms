@@ -17,6 +17,7 @@ ENV MMS_VERSION 3.0.0.167-1
 
 # Install using one RUN line to get around 42 AUFS layers limit.
 RUN \
+  cd /opt ; \
   apt-get update ; \
   apt-get install -q -y --force-yes curl ; \
   apt-get clean ; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ; \
@@ -29,10 +30,10 @@ echo "# Install MMS" ;\
 echo "# Generate start script" ;\
   echo '#!/bin/bash' > mms-agent ;\
   echo 'sed -i "s/mmsApiKey=/mmsApiKey=$MMS_API_KEY/g" monitoring-agent.config' >> mms-agent ;\
-  echo "./mongodb-mms-monitoring-agent" >> mms-agent ;\
+  echo "/opt/mongodb-mms-monitoring-agent" >> mms-agent ;\
   chmod +x mms-agent ;\
   \
 true
 # END RUN
 
-CMD [ "mms-agent" ]
+CMD [ "/opt/mms-agent" ]
