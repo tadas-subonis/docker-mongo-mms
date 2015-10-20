@@ -13,7 +13,7 @@ FROM debian:wheezy
 MAINTAINER Tadas Subonis
 
 ENV HOME /root
-ENV MMS_VERSION 3.9.0.233-1
+ENV MMS_VERSION 3.9.1.238-1
 
 # Install using one RUN line to get around 42 AUFS layers limit.
 RUN \
