@@ -13,8 +13,9 @@ FROM debian:wheezy
 MAINTAINER Tadas Subonis
 
 ENV HOME /root
-ENV MMS_VERSION 3.9.1.238-1
+ENV MMS_VERSION latest
 
+#curl -OL https://cloud.mongodb.com/download/agent/monitoring/mongodb-mms-monitoring-agent-latest.linux_x86_64.tar.gz
 # Install using one RUN line to get around 42 AUFS layers limit.
 RUN \
   cd /opt ; \
