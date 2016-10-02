@@ -27,7 +27,7 @@ echo "# Install MMS" ;\
   curl -sSL https://mms.mongodb.com/download/agent/monitoring/mongodb-mms-monitoring-agent-${MMS_VERSION}.linux_x86_64.tar.gz -o mms.tar.gz ;\
   tar zxf mms.tar.gz ;\
   rm mms.tar.gz ;\
-  mv mongodb-mms-monitoring-agent-${MMS_VERSION}.linux_x86_64 mms ;\
+  mv mongodb-mms-monitoring-agent-* mms ;\
   \
 echo "# Generate start script" ;\
   echo '#!/bin/bash' > mms-agent ;\
